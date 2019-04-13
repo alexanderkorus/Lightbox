@@ -7,6 +7,8 @@ public class LightboxConfig {
   /// Whether to show status bar while Lightbox is presented
   public static var hideStatusBar = true
 
+  public static var backgroundColor = UIColor.black
+
   /// Provide a closure to handle selected video
   public static var handleVideo: (_ from: UIViewController, _ videoURL: URL) -> Void = { from, videoURL in
     let videoController = AVPlayerViewController()
@@ -89,6 +91,11 @@ public class LightboxConfig {
       }()
     ]
   }
+    
+    public struct FooterView {
+        public static var gradientLayerEnabled = true
+        public static var backgroundColor = UIColor.clear
+    }
 
   public struct InfoLabel {
     public static var enabled = true

@@ -63,18 +63,17 @@ open class LightboxController: UIViewController {
   open fileprivate(set) lazy var footerView: FooterView = { [unowned self] in
     let view = FooterView()
     view.delegate = self
-
+    view.backgroundColor = .white
     return view
   }()
 
   open fileprivate(set) lazy var overlayView: UIView = { [unowned self] in
     let view = UIView(frame: CGRect.zero)
     let gradient = CAGradientLayer()
-    let colors = [UIColor(hex: "090909").withAlphaComponent(0), UIColor(hex: "040404")]
+    let colors = [UIColor(hex: "090909").withAlphaComponent(1.0), UIColor(hex: "040404").withAlphaComponent(1.0)]
 
     view.addGradientLayer(colors)
     view.alpha = 0
-
     return view
   }()
 
@@ -168,7 +167,7 @@ open class LightboxController: UIViewController {
 
     statusBarHidden = UIApplication.shared.isStatusBarHidden
 
-    view.backgroundColor = UIColor.black
+    view.backgroundColor = LightboxConfig.backgroundColor
     transitionManager.lightboxController = self
     transitionManager.scrollView = scrollView
     transitioningDelegate = transitionManager

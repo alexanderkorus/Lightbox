@@ -43,8 +43,20 @@ class ViewController: UIViewController {
       )
     ]
     
+    LightboxConfig.backgroundColor = .white
+    LightboxConfig.CloseButton.text = "Schließen"
+    LightboxConfig.CloseButton.textAttributes[NSAttributedString.Key.foregroundColor] = UIColor.gray
+    //LightboxConfig.FooterView.gradientColors = [UIColor.white, UIColor.white]
+    LightboxConfig.FooterView.gradientLayerEnabled = false
+    LightboxConfig.FooterView.backgroundColor = UIColor.white
+    LightboxConfig.InfoLabel.textColor = UIColor.black
+    LightboxConfig.InfoLabel.ellipsisColor = UIColor.black
+    LightboxConfig.InfoLabel.textAttributes[NSAttributedString.Key.foregroundColor] = UIColor.black
+    LightboxConfig.PageIndicator.separatorColor = UIColor.green
+    
     let controller = LightboxController(images: images)
-    controller.dynamicBackground = true
+    controller.dynamicBackground = false
+    
     
     present(controller, animated: true, completion: nil)
   }

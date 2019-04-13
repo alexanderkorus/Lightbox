@@ -34,7 +34,7 @@ open class FooterView: UIView {
     return view
   }()
 
-  let gradientColors = [UIColor(hex: "040404").withAlphaComponent(0.1), UIColor(hex: "040404")]
+  let gradientColors = [UIColor(hex: "040404").withAlphaComponent(1.0), UIColor(hex: "040404").withAlphaComponent(1.0)]
   open weak var delegate: FooterViewDelegate?
 
   // MARK: - Initializers
@@ -42,8 +42,11 @@ open class FooterView: UIView {
   public init() {
     super.init(frame: CGRect.zero)
 
-    backgroundColor = UIColor.clear
-    _ = addGradientLayer(gradientColors)
+    backgroundColor = LightboxConfig.FooterView.backgroundColor
+    if LightboxConfig.FooterView.gradientLayerEnabled {
+        _ = addGradientLayer(gradientColors)
+    }
+    
 
     [pageLabel, infoLabel, separatorView].forEach { addSubview($0) }
   }
@@ -71,7 +74,7 @@ open class FooterView: UIView {
 
     if text.isEmpty {
       _ = removeGradientLayer()
-    } else if !infoLabel.expanded {
+    } else if !infoLabel.expanded && LightboxConfig.FooterView.gradientLayerEnabled {
       _ = addGradientLayer(gradientColors)
     }
   }
@@ -119,7 +122,9 @@ extension FooterView: LayoutConfigurable {
 extension FooterView: InfoLabelDelegate {
 
   public func infoLabel(_ infoLabel: InfoLabel, didExpand expanded: Bool) {
-    _ = (expanded || infoLabel.fullText.isEmpty) ? removeGradientLayer() : addGradientLayer(gradientColors)
+    if LightboxConfig.FooterView.gradientLayerEnabled {
+        _ = (expanded || infoLabel.fullText.isEmpty) ? removeGradientLayer() : addGradientLayer(gradientColors)
+    }
     delegate?.footerView(self, didExpand: expanded)
   }
 }
